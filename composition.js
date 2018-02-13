@@ -15,6 +15,7 @@ class Cookie {
 		this.status = "mentah";
 		this.ingredients = ingredients;
 		this.has_sugar = this.isHasSugar();
+
 	}
 
 	bake() {
@@ -47,14 +48,14 @@ class ChocolateChip extends Cookie {
 class PeanutButterCrumbled extends Cookie {
 	constructor(name, ingredients) {
 		super(name, ingredients);
-		this.peanut_count = 50;
+		this.peanut_crambled_count = 50;
 	}
 }
 
 class ChocolateChipCrumbled extends Cookie {
 	constructor(name, ingredients) {
 		super(name, ingredients);
-		this.choc_chip_count = 50;
+		this.choc_chip_crambled_count = 50;
 	}
 }
 
