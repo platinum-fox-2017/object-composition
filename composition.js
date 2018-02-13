@@ -1,13 +1,11 @@
 "use strict"
-// kodenya terasa barbar
+// sudah tidak barbar~
 class Cookie {
   constructor(name) {
     this.name = name;
     this.status = 'mentah';
     this.ingredients = this.composition();
   }
-
-
 
   composition(){
     let array = [];
