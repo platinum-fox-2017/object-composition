@@ -45,6 +45,20 @@ class OtherCookie extends Cookie{ // has ingridients list
   }
 }
 
+class ChocolateChipCrumbled extends Cookie{ // has ingridients list
+  constructor(name, ingridients) {
+    super(name, ingridients)
+    this.other_count = 30
+  }
+}
+
+class PeanutButterCrumbled extends Cookie{ // has ingridients list
+  constructor(name, ingridients) {
+    super(name, ingridients)
+    this.other_count = 60
+  }
+}
+
 class Ingridients {
   constructor(name, amount, type) { //
     this.name = name
@@ -96,6 +110,10 @@ class CookieFactory {
         batch.push(new PeanutButter(recipeName, ingridients));
       } else if (recipeName === 'chocolate chip') {
         batch.push(new ChocolateChip(recipeName, ingridients));
+      } else if (recipeName === 'chocolate chip crumbled') {
+        batch.push(new ChocolateChipCrumbled(recipeName, ingridients))
+      } else if (recipeName === 'peanut butter crumbled') {
+        batch.push(new PeanutButterCrumbled(recipeName, ingridients))
       } else {
         batch.push(new OtherCookie(recipeName, ingridients));
       }
