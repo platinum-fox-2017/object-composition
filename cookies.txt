@@ -1,0 +1,6 @@
+peanut butter     = 1 cup : flour, 2 cups : sugar, 2 cups : peanut butter, 1 cup : cinnamon, 2 tsp : butter
+chocolate chip    = 1 cup : chips, 2 cups : sugar, 2 tsp : butter
+chocolate cheese  = 1 cup : flour, 2 cups : sugar, 2 cup : cinnamon, 1 tsp : butter
+chocolate butter  = 1 cup : gluten free flour, 1 cups : flavor essence, 2 tsp : butter
+chocolate chip crumbled = 1 cup : flour, 3 cup : chips, 2 tsp : butter
+peanut butter crumbled = 2 cup : flour, 1 cup : chips, 2 cups : sugar, 3 cups : peanut butter, 1 cup : cinnamon, 2 tsp : butter
