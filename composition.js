@@ -1,13 +1,28 @@
 "use strict"
 
-const fs = require('fs')
+class Ingredient {
+    constructor(options) {
+      this.name = options['name']
+      this.amount = options['amount']
+    }
+}
 
 class Cookie {
-  constructor() {
-    this.name = 'Cookie'
+  constructor(name,ingredients) {
+    this.name = name
     this.status = "mentah"
-    this.ingredients = []
+    this.ingredients = ingredients
+    this.has_sugar = this.hasSugar()
   }
+  hasSugar(){
+    for(let i =0; i<this.ingredients.length; i++){
+      if(this.ingredients[i].name === 'sugar'){
+        return true
+      }
+    }
+    return false
+  }
+
 
   bake() {
     this.status = "selesai dimasak"
@@ -15,47 +30,24 @@ class Cookie {
 }
 
 class PeanutButter extends Cookie {
-  constructor(name) {
-      super()
-    this.name = name
+  constructor(name, ingredients) {
+      super(name, ingredients)
     this.peanut_count = 100
   }
 }
 
 class ChocholateChip extends Cookie {
-  constructor(name) {
-      super()
-    this.name = name
-    this.choc_chip_count = 200
+  constructor(name, ingredients) {
+      super(name,ingredients)
+      this.choc_chip_count = 200
   }
 }
 
 class OtherCookie extends Cookie {
-    constructor(name) {
-        super()
-      this.name = name
+    constructor(name, ingredients) {
+        super(name, ingredients)
       this.choc_chip_count = 150
     }
 }
 
-let options = fs.readFileSync('cookies.txt','utf8').split('\n')
-
-class CookieFactory {
-    static create(options){
-    let cookies = []
-    for(let i =0; i<options.length; i++){
-        if(options[i] === 'peanut butter'){
-            cookies.push(new PeanutButter(options[i]))
-        }else if(options[i] === 'chocolate chip'){
-            cookies.push(new ChocholateChip(options[i]))
-        }else{
-            cookies.push(new OtherCookie(options[i]))           
-        }
-      }
-      return cookies
-    }
-}
-  
-  let batch_of_cookies = CookieFactory.create(options);
-  console.log(batch_of_cookies);
-  
+module.exports = {PeanutButter, ChocholateChip, OtherCookie, Ingredient}
