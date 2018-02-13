@@ -1,76 +1,47 @@
 "use strict"
 // kodenya terasa barbar
 class Cookie {
-  constructor() {
-    this.name = 'unknown';
+  constructor(name) {
+    this.name = name;
     this.status = 'mentah';
+    this.ingredients = this.composition();
   }
+
+
+
+  composition(){
+    let array = [];
+    for(let i=0; i<ingred.length; i++){
+      let pisah = ingred[i].split(',');
+      if(pisah[0]===this.name){
+        for(let c=1; c<pisah.length; c++){
+          array.push(pisah[c]);
+        }
+      }
+    }
+    return array;
+  }
+
 }
 
 class PeanutButter extends Cookie {
   constructor(name) {
-    super();
-    this.name = name;
+    super(name);
     this.peanut_count = 100;
-    this.ingredients = this.ingredients();
   }
-
-  ingredients(){
-    let array = [];
-    for(let i=0; i<ingred.length; i++){
-      let pisah = ingred[i].split(',');
-      if(pisah[0]===this.name){
-        for(let c=1; c<pisah.length; c++){
-          array.push(pisah[c]);
-        }
-      }
-    }
-    return array;
-  }
-
 }
 
 class ChocolateChip extends Cookie {
   constructor(name) {
-    super();
-    this.name = name;
+    super(name);
     this.choc_chip_count = 200;
-    this.ingredients = this.ingredients();
-  }
-
-  ingredients(){
-    let array = [];
-    for(let i=0; i<ingred.length; i++){
-      let pisah = ingred[i].split(',');
-      if(pisah[0]===this.name){
-        for(let c=1; c<pisah.length; c++){
-          array.push(pisah[c]);
-        }
-      }
-    }
-    return array;
   }
 }
 
 class OtherCookie extends Cookie {
   constructor(name) {
-    super()
-    this.name = name;
+    super(name);
     this.other_count = 150;
-    this.ingredients = this.ingredients();
-  }
-
-  ingredients(){
-    let array = [];
-    for(let i=0; i<ingred.length; i++){
-      let pisah = ingred[i].split(',');
-      if(pisah[0]===this.name){
-        for(let c=1; c<pisah.length; c++){
-          array.push(pisah[c]);
-        }
-      }
-    }
-    return array;
   }
 }
 
@@ -118,6 +89,6 @@ let batch_of_cookies = CookieFactory.create(options);
 //liat daftar kue dan komposisinya
 console.log(batch_of_cookies);
 let nosugar = NoSugar.no_sugar();
-//rekomendasi makanan yang tidak mengandung gula
+// //rekomendasi makanan yang tidak mengandung gula
 console.log('---------------------------')
 console.log(nosugar);
