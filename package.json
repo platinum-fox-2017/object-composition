@@ -1,0 +1,19 @@
+{
+  "name": "object-composition",
+  "version": "1.0.0",
+  "description": "",
+  "main": "composition.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platinum-fox-2017/object-composition.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/platinum-fox-2017/object-composition/issues"
+  },
+  "homepage": "https://github.com/platinum-fox-2017/object-composition#readme"
+}
