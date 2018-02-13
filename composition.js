@@ -23,7 +23,6 @@ class Cookie {
     return false
   }
 
-
   bake() {
     this.status = "selesai dimasak"
   }
