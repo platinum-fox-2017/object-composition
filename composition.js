@@ -46,26 +46,26 @@ class CookieFactory {
     static create(option) {
         let cookiesArr = []
         let nameArr = [];
-
+        let cookie = new CookieFactory
         for (let j = 0; j < option.length; j++) {
             nameArr.push(option.join('||').split('||')[j].split(':')[0].split('=')[0].trim())
         }
 
         for (let i = 0; i < nameArr.length; i++) {
             if (nameArr[i] === 'peanut butter') {
-                cookiesArr.push(new PeanutButter(nameArr[i], CookieFactory.getIngredient(option[0])))
+                cookiesArr.push(new PeanutButter(nameArr[i], cookie.getIngredient(option[0])))
             } else if (nameArr[i] === 'chocolate chip') {
-                cookiesArr.push(new ChocolateChip(nameArr[i], CookieFactory.getIngredient(option[1])))
+                cookiesArr.push(new ChocolateChip(nameArr[i], cookie.getIngredient(option[1])))
             } else if (nameArr[i] === 'chocolate cheese') {
-                cookiesArr.push(new OtherCookie(nameArr[i], CookieFactory.getIngredient(option[2])))
+                cookiesArr.push(new OtherCookie(nameArr[i], cookie.getIngredient(option[2])))
             } else if (nameArr[i] === 'chocolate butter') {
-                cookiesArr.push(new OtherCookie(nameArr[i], CookieFactory.getIngredient(option[3])))
+                cookiesArr.push(new OtherCookie(nameArr[i], cookie.getIngredient(option[3])))
             }
         }
         return cookiesArr
     }
 
-    static getIngredient(option) {
+    getIngredient(option) {
         let arrIngredients = [];
         let splitOption = option.split('=')
         let dataLength = splitOption[1].split(',')
