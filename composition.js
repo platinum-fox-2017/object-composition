@@ -6,12 +6,21 @@ class Cookie {
 		this.name = name
 		this.status = "mentah"
 		this.ingredients = objIngre
-		this.has_sugar = true
+		this.has_sugar = false
   }
 
   bake() {
     this.status = "selesai dimasak"
-  }
+	}
+	checkSugar(){
+		for(let i =0;i<this.ingredients.length;i++){
+			if(this.ingredients[i].name.trim() === 'sugar'){
+				return this.has_sugar = true
+			}
+		}
+		return this.has_sugar
+	}
+
 }
 
 class PeanutButter extends Cookie {
@@ -48,48 +57,49 @@ class CookieFactory {
 		let arrCookie = []
 		let cookieList = options.split('\n')
 		for(let i =0;i<cookieList.length;i++){
-			// console.log(cookieList[i].split('='),"---------")
 			let splitCookieName = cookieList[i].split('=')
-			// console.log('--------'+splitCookieName[0].trim()+'-----nameeee')
 			let splitIngredients = splitCookieName[1].split(',')
-			// console.log(splitIngredients,"-------")
 			let arrIngre = []
 			for(let j=0;j<splitIngredients.length;j++){
-				// console.log(splitIngredients[j].split(':'),'ingre')
 				let cookieIngre = splitIngredients[j].split(':')
-				// console.log('----'+cookieIngre[1].trim()+'-----------')
-				
-				// if(cookieIngre[1].trim()=== 'sugar'){
-				// 	let objIngeCookie = new Ingredients(cookieIngre[1],cookieIngre[0],true)
-				// 	arrIngre.push(objIngeCookie)
-				// }else{
-				// 	let objIngeCookie = new Ingredients(cookieIngre[1],cookieIngre[0],false)
-				// 	arrIngre.push(objIngeCookie)
-				// }
-				// console.log(arrIngre)
 				let objIngeCookie = new Ingredients(cookieIngre[1],cookieIngre[0])
 					arrIngre.push(objIngeCookie)
 			}
-				if(splitCookieName[0].trim() === 'peanut butter'){
-					// console.log(arrIngre,'peanut---------------')
-					let objCookies = new PeanutButter(splitCookieName[0].trim(),arrIngre)
-					console.log(objCookies,'ini masuk')
-					arrCookie.push(JSON.stringify(objCookies))
-				}
-				else if(splitCookieName[0].trim() === 'chocolate chip'){
-					// console.log(arrIngre,'chocolatechip---------------')
-					let objCookies = new ChocholateChip(splitCookieName[0].trim(),arrIngre)
-					arrCookie.push(objCookies)
-				}
-				else{
-					// console.log(arrIngre,'other---------------')
-					let objCookies = new OtherCookie(splitCookieName[0].trim(),arrIngre)
-					arrCookie.push(objCookies)
-				}
-				// console.log(arrCookie)
+			if(splitCookieName[0].trim() === 'peanut butter'){
+				let objCookies = new PeanutButter(splitCookieName[0].trim(),arrIngre)
+				objCookies.checkSugar()
+				// console.log(objCookies.checkSugar(),'ini masuk')//
+				arrCookie.push(objCookies)
+			}
+			else if(splitCookieName[0].trim() === 'chocolate chip'){
+				let objCookies = new ChocholateChip(splitCookieName[0].trim(),arrIngre)
+				objCookies.checkSugar()
+				arrCookie.push(objCookies)
+			}
+			else{
+				let objCookies = new OtherCookie(splitCookieName[0].trim(),arrIngre)
+				objCookies.checkSugar()
+				arrCookie.push(objCookies)
+			}
 		}
 		return arrCookie
-  }
+	}
+
+	static cookieRecommendation(day,cookies){
+		let freeSugar = []
+		for(let i =0;i<cookies.length;i++){
+			// console.log(cookies[i].has_sugar,'has sugar???????')
+			if(cookies[i].has_sugar === false){
+				// console.log(cookies[i].name)
+				freeSugar.push(cookies[i])
+			}
+		}
+		// console.log(freeSugar[0].name)
+		return freeSugar
+
+	}
+	
+
 	
 }
 
@@ -104,33 +114,12 @@ class Ingredients {
 let options = fs.readFileSync('cookies.txt','utf8')
 // console.log(options)
 let batch_of_cookies = CookieFactory.create(options);
-console.log(batch_of_cookies);
+// console.log(batch_of_cookies);
 
 
-// let sugarFreeFoods = CookieFactory.cookieRecommendation("tuesday", batch_of_cookies);
-// console.log("sugar free cakes are :");
-// for(let i = 0; i < sugarFreeFoods.length; i++){
-//   console.log(sugarFreeFoods[i].name);
-// }
-
-// Contoh result nya :
-// [ PeanutButter {
-//     name: 'peanut butter',
-//     status: 'mentah',
-//     ingredients: [],
-//     peanut_count: 100 },
-//   ChocholateChip {
-//     name: 'chocolate chip',
-//     status: 'mentah',
-//     ingredients: [],
-//     choc_chip_count: 200 },
-//   OtherCookie {
-//     name: 'chocolate cheese',
-//     status: 'mentah',
-//     ingredients: [],
-//     other_count: 150 },
-//   OtherCookie {
-//     name: 'chocolate butter',
-//     status: 'mentah',
-//     ingredients: [],
-//     other_count: 150 } ]
+let sugarFreeFoods = CookieFactory.cookieRecommendation("tuesday", batch_of_cookies);
+console.log("sugar free cakes are :");
+for(let i = 0; i < sugarFreeFoods.length; i++){
+  console.log(sugarFreeFoods[i].name);
+}
+// console.log(sugarFreeFoods)
