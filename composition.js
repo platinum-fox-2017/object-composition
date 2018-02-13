@@ -84,19 +84,17 @@ class CookieFactory {
     }
 
     static wichIngredients(option) {
-        let list = '';
+        let list = fs.readFileSync('./cookies.txt','utf8').split('\n')
         let ingredientsList=[];
-        if(option === 'peanut butter' || option === 'peanut butter crumbled') 
-            list = '1 cup : flour, 2 cups (gluten) : sugar, 2 cups : peanut butter, 1 cup : cinnamon, 2 tsp : butter';
-        else if(option === 'chocolate chip' || option === 'chocolate chip crumbled')
-            list = '1 cup : chips, 1 cup : sugar, 2 tsp : butter';
-        else if(option === 'chocolate cheese')
-            list = '1 cup : flour, 2 cups : sugar, 2 cups : cinnamon, 1 tblsp : butter';
-        else if(option === 'chocolate butter')
-            list = '1 cup : gluten free flour, 1 cup : flavoor adders, 2 tsp : butter';
-        list = list.split(', ')
-        for(let i in list) {
-            let ingredients = new Ingredients(list[i])
+        let ingredientsStr='';
+        for(let i = 0; i<list.length; i++) {
+            if(list[i].indexOf((option+' ='))>=0) {
+                ingredientsStr = list[i].slice(list[i].indexOf('=')+2,list[i].length)
+            }
+        }
+        ingredientsStr = ingredientsStr.split(', ')
+        for(let i in ingredientsStr) {
+            let ingredients = new Ingredients(ingredientsStr[i])
             ingredientsList.push(ingredients)
         }
         return ingredientsList;
@@ -122,7 +120,11 @@ class Ingredients {
     }
 }
 
-var option = fs.readFileSync('./cookies.txt','utf8').split('\n')
+let list = fs.readFileSync('./cookies.txt','utf8').split('\n')
+
+let option = list.map(a=>a.slice(0,a.indexOf('=')-1));
+console.log(option)
+
 
 let batch_of_cookies = CookieFactory.create(option);
 console.log(batch_of_cookies);
