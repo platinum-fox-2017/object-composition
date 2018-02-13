@@ -1,16 +1,10 @@
 "use strict"
-
+// kodenya terasa barbar
 class Cookie {
-  constructor(name) {
-    this.name = name;
+  constructor() {
+    this.name = 'unknown';
     this.status = 'mentah';
-    this.ingredients = [];
   }
-
-  bake() {
-    this.status = 'selesai dimasak';
-  }
-
 }
 
 class PeanutButter extends Cookie {
@@ -18,7 +12,22 @@ class PeanutButter extends Cookie {
     super();
     this.name = name;
     this.peanut_count = 100;
+    this.ingredients = this.ingredients();
   }
+
+  ingredients(){
+    let array = [];
+    for(let i=0; i<ingred.length; i++){
+      let pisah = ingred[i].split(',');
+      if(pisah[0]===this.name){
+        for(let c=1; c<pisah.length; c++){
+          array.push(pisah[c]);
+        }
+      }
+    }
+    return array;
+  }
+
 }
 
 class ChocolateChip extends Cookie {
@@ -26,6 +35,20 @@ class ChocolateChip extends Cookie {
     super();
     this.name = name;
     this.choc_chip_count = 200;
+    this.ingredients = this.ingredients();
+  }
+
+  ingredients(){
+    let array = [];
+    for(let i=0; i<ingred.length; i++){
+      let pisah = ingred[i].split(',');
+      if(pisah[0]===this.name){
+        for(let c=1; c<pisah.length; c++){
+          array.push(pisah[c]);
+        }
+      }
+    }
+    return array;
   }
 }
 
@@ -34,6 +57,20 @@ class OtherCookie extends Cookie {
     super()
     this.name = name;
     this.other_count = 150;
+    this.ingredients = this.ingredients();
+  }
+
+  ingredients(){
+    let array = [];
+    for(let i=0; i<ingred.length; i++){
+      let pisah = ingred[i].split(',');
+      if(pisah[0]===this.name){
+        for(let c=1; c<pisah.length; c++){
+          array.push(pisah[c]);
+        }
+      }
+    }
+    return array;
   }
 }
 
@@ -42,29 +79,45 @@ class CookieFactory {
     let array = [];
     for(let i=0; i<options.length-1; i++){
       if(options[i]==='peanut butter'){
-        var peanut = new PeanutButter(options[i]);
+        let peanut = new PeanutButter(options[i]);
         array.push(peanut);
       } else if(options[i]==='chocolate chip'){
-        var choc = new ChocolateChip(options[i]);
+        let choc = new ChocolateChip(options[i]);
         array.push(choc);
       } else {
-        var other = new OtherCookie(options[i]);
+        let other = new OtherCookie(options[i]);
         array.push(other);
       }
     }
     return array;
   }
-  // define other method as needed
+}
+
+class NoSugar {
+  static no_sugar(){
+    let cookie = CookieFactory.create(options);
+    let withSugar = [];
+    for(let b=0; b<cookie.length; b++){
+      for(let v=0; v<cookie[b].ingredients.length; v++){
+        if(cookie[b].ingredients[v]==='sugar'){
+          withSugar.push(cookie[b].name);
+        }
+      }
+    }
+    return `If you want to eat no-sugar cookies on Tuesday, you can eat all cookies except ${withSugar}!`;
+  }
 }
 
 var fs = require('fs');
-var options = fs.readFileSync('cookies.txt', 'UTF-8')
+var options = fs.readFileSync('cookies.txt','UTF-8')
+  .split('\n');
+var ingred = fs.readFileSync('ingredients.txt','UTF-8')
   .split('\n');
 
-// sesuaikan dengan model inheritance
-// baca daftar kue dari file dan kirim ke cookie factory
-// dimana lokasi file yang kamu tulis supaya kode bisa berjalan?
 let batch_of_cookies = CookieFactory.create(options);
+//liat daftar kue dan komposisinya
 console.log(batch_of_cookies);
-// var peanut = new PeanutButter();
-// console.log(options[3]);
+let nosugar = NoSugar.no_sugar();
+//rekomendasi makanan yang tidak mengandung gula
+console.log('---------------------------')
+console.log(nosugar);
