@@ -13,18 +13,18 @@ class CookieFactory{
     let cookies = [];
     for(var i = 0; i < options.length; i++){
       if(options[i] === 'peanut butter')  {
-        let ingredient1 =new Ingredients('butter',1,true);
-        let ingredient2 =new Ingredients('garam',1,false);
+        let ingredient1 =new Ingredients('butter',1);
+        let ingredient2 =new Ingredients('garam',1);
         let ingredients = [ingredient1,ingredient2] ;
         cookies.push(new PeanutButter(ingredients) );
       } else if(options[i] === 'chocolate chip'){
-        let ingredient1 = new Ingredients('chocolate',1,false);
-        let ingredient2 =new Ingredients('garam',1,false);
+        let ingredient1 = new Ingredients('chocolate',1);
+        let ingredient2 =new Ingredients('garam',1);
         let ingredients = [ingredient1,ingredient2] ;
         cookies.push(new ChocholateChip(ingredients));
       } else if(options[i] != '') {
-        let ingredient1 = new Ingredients('sugar',1,true);
-        let ingredient2 =new Ingredients('garam',1,false);
+        let ingredient1 = new Ingredients('sugar',1);
+        let ingredient2 =new Ingredients('garam',1);
         let ingredients = [ingredient1,ingredient2] ;
         cookies.push(new OtherCookie(options[i],ingredients));
       }
@@ -35,13 +35,7 @@ class CookieFactory{
     let sugarFreeFoods = [];
     for(var i = 0; i < batch_of_cookies.length; i++){
       if(day === 'tuesday'){
-        let isHasSugar = false;
-        for(var j = 0; j < batch_of_cookies[i].ingredients.length; j++){
-          if(batch_of_cookies[i].ingredients[j].has_sugar){
-            isHasSugar = true;
-          }
-        }
-        if(!isHasSugar){
+        if(!batch_of_cookies[i].has_sugar){
           sugarFreeFoods.push(batch_of_cookies[i]);
         }
       }

@@ -1,8 +1,7 @@
 class Ingredients {
-  constructor(name,amount,has_sugar)  {
+  constructor(name,amount)  {
     this.name = name;
     this.amount = amount;
-    this.has_sugar = has_sugar;
   }
 }
 
