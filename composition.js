@@ -47,49 +47,30 @@ class CookieFactory{
     for (var i = 0; i < option.length; i++) {
       var simpanajedulu= option[i].split('=')
       if(simpanajedulu[0]==='peanut butter'){
-        var simpankomposisi=[]
-        var pecahkomposisi=simpanajedulu[1].split(',')
-        for (let j = 0; j < pecahkomposisi.length; j++) {
-          var pecahlagi= pecahkomposisi[j].split(':')
-          var komposisiobj={
-            name:pecahlagi[1],
-            amount:pecahlagi[0]
-          }
-          simpankomposisi.push(new Ingredient(komposisiobj))
-        }
-        simpan.push(new PeanutButter(simpanajedulu[0],simpankomposisi))
+        simpan.push(new PeanutButter(simpanajedulu[0],this.mecah(simpanajedulu[1])))
       }
       else if(simpanajedulu[0]==='chocolate chip'){
-        var simpankomposisi=[]
-        var pecahkomposisi=simpanajedulu[1].split(',')
-        for (let j = 0; j < pecahkomposisi.length; j++) {
-          var pecahlagi= pecahkomposisi[j].split(':')
-          var komposisiobj={
-            name:pecahlagi[1],
-            amount:pecahlagi[0]
-          }
-          simpankomposisi.push(new Ingredient(komposisiobj))
-        }
-        simpan.push(new ChocholateChip(simpanajedulu[0],simpankomposisi))
-
+        simpan.push(new ChocholateChip(simpanajedulu[0],this.mecah(simpanajedulu[1])))
       }
       else{
-        var simpankomposisi=[]
-
-        var pecahkomposisi=simpanajedulu[1].split(',')
-        for (let j = 0; j < pecahkomposisi.length; j++) {
-          var pecahlagi= pecahkomposisi[j].split(':')
-          var komposisiobj={
-            name:pecahlagi[1],
-            amount:pecahlagi[0]
-          }
-          simpankomposisi.push(new Ingredient(komposisiobj))
-        }
-        simpan.push(new OtherCookie(simpanajedulu[0],simpankomposisi))
-
+        simpan.push(new OtherCookie(simpanajedulu[0],this.mecah(simpanajedulu[1])))
       }
     }
     return simpan
+  }
+
+  static mecah(kompos){
+    var simpankomposisi=[]
+    var pecahkomposisi=kompos.split(',')
+    for (let j = 0; j < pecahkomposisi.length; j++) {
+      var pecahlagi= pecahkomposisi[j].split(':')
+      var komposisiobj={
+        name:pecahlagi[1].trim(),
+        amount:pecahlagi[0].trim()
+      }
+      simpankomposisi.push(new Ingredient(komposisiobj))
+    }
+    return simpankomposisi
   }
 
   static cookieRecommendation(hari,makanan){
@@ -98,7 +79,7 @@ class CookieFactory{
     for (let i = 0; i < makanan.length; i++) {
       var sugar=0
       for(let j= 0; j < makanan[i].ingredients.length;j++){
-        if(makanan[i].ingredients[j].name === ' sugar'){
+        if(makanan[i].ingredients[j].name === 'sugar'){
           sugar=1
           break;
         }
