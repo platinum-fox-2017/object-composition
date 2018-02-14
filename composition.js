@@ -107,7 +107,7 @@ class CookieFactory {
         let objIngredient = {}
         objIngredient.name = ingredientsSplit[j].split(' : ')[1]
         objIngredient.amount = ingredientsSplit[j].split(' : ')[0]
-        arrIngredient.push(objIngredient)
+        arrIngredient.push(new Ingredient(objIngredient))
       }
       obj.ingredients = arrIngredient
 
@@ -134,7 +134,7 @@ class CookieFactory {
 
 //membuat list cookies
 let listOptions = CookieFactory.listOptions()
-
+//membuat cookies
 let batch_of_cookies = CookieFactory.create(listOptions);
 console.log(batch_of_cookies);
 
